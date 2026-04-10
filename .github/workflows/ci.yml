@@ -9,12 +9,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-steps:
-- name: Checkout code
-  uses: actions/checkout@v4
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-- name: Set up Docker Buildx
-  uses: docker/setup-buildx-actions@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-actions@v3
 
-- name: Build Docker Image
-  run: docker build -t my-app:latest .
+      - name: Build Docker Image
+        run: docker build -t my-app:latest .
