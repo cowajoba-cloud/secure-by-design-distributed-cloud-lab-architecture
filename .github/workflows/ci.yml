@@ -2,10 +2,10 @@ name: Docker CI Pipeline
 on:
   push:
     branches:
-      -main
+      - main
   pull_request:
-  branches:
-    -main
+    branches:
+      - main
 jobs:
   build:
     runs-on: ubuntu-latest
