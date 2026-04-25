@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-scan-push:
-    name: Build, Scan, Push, Validate
+    name: Build Scan Push Validate
     runs-on: [self-hosted, Linux, X64, docker]
 
     env:
@@ -23,23 +23,23 @@ jobs:
 
       - name: Build Image
         run: |
-          docker build -t $IMAGE_NAME:${{ github.sha }} $APP_PATH
+          docker build -t "$IMAGE_NAME:${{ github.sha }}" "$APP_PATH"
 
-      - name: Scan Image (Trivy)
+      - name: Scan Image With Trivy
         run: |
-          trivy image --severity HIGH,CRITICAL --exit-code 1 $IMAGE_NAME:${{ github.sha }}
+          trivy image --severity HIGH,CRITICAL --exit-code 1 "$IMAGE_NAME:${{ github.sha }}"
 
       - name: Tag Image
         run: |
-          docker tag $IMAGE_NAME:${{ github.sha }} $REGISTRY/$IMAGE_NAME:${{ github.sha }}
-          docker tag $IMAGE_NAME:${{ github.sha }} $REGISTRY/$IMAGE_NAME:latest
+          docker tag "$IMAGE_NAME:${{ github.sha }}" "$REGISTRY/$IMAGE_NAME:${{ github.sha }}"
+          docker tag "$IMAGE_NAME:${{ github.sha }}" "$REGISTRY/$IMAGE_NAME:latest"
 
       - name: Push Image
         run: |
-          docker push $REGISTRY/$IMAGE_NAME:${{ github.sha }}
-          docker push $REGISTRY/$IMAGE_NAME:latest
+          docker push "$REGISTRY/$IMAGE_NAME:${{ github.sha }}"
+          docker push "$REGISTRY/$IMAGE_NAME:latest"
 
       - name: Validate Registry
         run: |
-          curl -k https://$REGISTRY/v2/_catalog
+          curl -k "https://$REGISTRY/v2/_catalog"
 EOF
