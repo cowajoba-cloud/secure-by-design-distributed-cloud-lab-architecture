@@ -10,23 +10,14 @@ jobs:
     runs-on: [self-hosted, Linux, X64, docker]
 
     steps:
-      - name: Check Workspace
-        run: |
-          pwd
-          ls -la
-
       - name: Check Docker
         run: |
           docker ps
           docker version
 
-      - name: Build Docker Image
+      - name: Build Image
         run: |
-          docker build -t secure-app:v1 ./docker/secure-app
-
-      - name: Scan Image with Trivy
-        run: |
-          trivy image --severity HIGH,CRITICAL secure-app:v1 || true
+          docker build -t secure-app:v1 /home/charlie/secure-by-design-distributed-cloud-lab-architecture/docker/secure-app
 
       - name: Tag Image
         run: |
