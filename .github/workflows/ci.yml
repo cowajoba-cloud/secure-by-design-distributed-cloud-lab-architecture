@@ -2,21 +2,40 @@ name: Secure CI/CD Pipeline
 
 on:
   push:
-    branches: ["main"]
+    branches:
+      - main
 
 jobs:
-  build-push:
-    runs-on: self-hosted
+  build-scan-push:
+    runs-on: [self-hosted, Linux, X64, docker]
 
     steps:
+      - name: Check Workspace
+        run: |
+          pwd
+          ls -la
+
+      - name: Check Docker
+        run: |
+          docker ps
+          docker version
+
       - name: Build Docker Image
         run: |
-          cd docker/secure-app
-          docker built -t secure-appv1 .
+          docker build -t secure-app:v1 ./docker/secure-app
+
+      - name: Scan Image with Trivy
+        run: |
+          trivy image --severity HIGH,CRITICAL secure-app:v1 || true
 
       - name: Tag Image
         run: |
           docker tag secure-app:v1 192.168.56.100:5000/secure-app:v1
-      - name: Push to Private Registry
+
+      - name: Push Image to Private Registry
         run: |
           docker push 192.168.56.100:5000/secure-app:v1
+
+      - name: Validate Registry Push
+        run: |
+          curl -k https://192.168.56.100:5000/v2/_catalog
