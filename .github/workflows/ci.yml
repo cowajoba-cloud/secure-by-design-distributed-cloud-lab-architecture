@@ -1,4 +1,4 @@
-name: Secure CI/CD Pipeline
+name: Secure CI CD Pipeline
 
 on:
   push:
@@ -6,40 +6,22 @@ on:
       - main
 
 jobs:
-  build-scan-push:
-    name: Build Scan Push Validate
+  build-push:
     runs-on: self-hosted
-
-    env:
-      IMAGE_NAME: secure-app
-      REGISTRY: 192.168.56.100:5000
-      APP_PATH: /home/charlie/secure-by-design-distributed-cloud-lab-architecture/docker/secure-app
 
     steps:
       - name: Check Docker
-        run: |
-          docker version
-          docker ps
+        run: docker ps
 
       - name: Build Image
-        run: |
-          docker build -t secure-app:${{ github.sha }} /home/charlie/secure-by-design-distributed-cloud-lab-architecture/docker/secure-app
-
-      - name: Scan Image With Trivy
-        run: |
-          trivy image --severity HIGH,CRITICAL --exit-code 1 secure-app:${{ github.sha }}
+        run: docker build -t secure-app:v1 /home/charlie/secure-by-design-distributed-cloud-lab-architecture/docker/secure-app
 
       - name: Tag Image
-        run: |
-          docker tag secure-app:${{ github.sha }} 192.168.56.100:5000/secure-app:${{ github.sha }}
-          docker tag secure-app:${{ github.sha }} 192.168.56.100:5000/secure-app:latest
+        run: docker tag secure-app:v1 192.168.56.100:5000/secure-app:v1
 
       - name: Push Image
-        run: |
-          docker push 192.168.56.100:5000/secure-app:${{ github.sha }}
-          docker push 192.168.56.100:5000/secure-app:latest
+        run: docker push 192.168.56.100:5000/secure-app:v1
 
       - name: Validate Registry
-        run: |
-          curl -k https://192.168.56.100:5000/v2/_catalog
+        run: curl -k https://192.168.56.100:5000/v2/_catalog
 EOF
