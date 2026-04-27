@@ -1,3 +1,10 @@
+# **Author: Charles Owajoba**
+**MSc Computer Science (Software Engineering)**
+
+**GitHub:** https://github.com/cowajoba-cloud  
+**LinkedIn:** https://www.linkedin.com/in/charlesowajoba/  
+**ORCID:** https://orcid.org/0009-0005-5558-9558
+
 # 🛡️ Secure-by-Design Distributed Cloud Lab Architecture
 
 > A production-style Security Engineering lab demonstrating secure architecture design, centralized monitoring, system hardening, DevSecOps automation, threat simulation, and compliance alignment.
