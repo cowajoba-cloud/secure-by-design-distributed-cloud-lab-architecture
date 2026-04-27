@@ -32,7 +32,7 @@ The architecture is built on:
 ## 🖼️ Evidence
 
 **Figure S01: Secure Architecture Overview**  
-![Architecture](../screenshots/01-architecture/S01_architecture_overview_diagram.png)
+![Architecture](../../screenshots/01-architecture/S01_architecture_overview_diagram.png)
 
 ---
 
