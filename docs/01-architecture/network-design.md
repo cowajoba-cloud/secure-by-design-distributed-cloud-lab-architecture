@@ -131,6 +131,9 @@ These tests confirm:
 | Attack simulation path controlled | ✅ Successful |
 
 ## 🖼️ Evidence
+![Network Connectivity Test](../../screenshots/03-wazuh/figure8-network-connectivity-test.png)
+
+![Wazuh Dashboard Reachable Internally](../00-research-assets/screenshots/week7-8-detection-validation/figure1-wazuh-dashboard-overview.png)
 
 ## ⚠️ Network Risk Considerations
 | Risk | Mitigation |
