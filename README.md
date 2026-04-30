@@ -1,5 +1,5 @@
 # **Author: Charles Owajoba**
-**MSc Computer Science (Software Engineering)**
+**MSc Cybersecurity X MSc Computer Science (Software Engineering)**
 
 **GitHub:** https://github.com/cowajoba-cloud  
 **LinkedIn:** https://www.linkedin.com/in/charlesowajoba/  
